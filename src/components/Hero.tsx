@@ -1,9 +1,26 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Users, Star, TrendingUp } from 'lucide-react';
+import { BookOpen, Users, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 export const Hero = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleStartJourney = () => {
+    if (user) {
+      navigate('/my-books');
+    } else {
+      navigate('/auth');
+    }
+  };
+
+  const handleExploreBooks = () => {
+    navigate('/discover');
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-20 px-4">
       <div className="container mx-auto max-w-6xl text-center">
@@ -26,10 +43,19 @@ export const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 text-lg">
-            Start Reading Journey
+          <Button 
+            size="lg" 
+            className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 text-lg"
+            onClick={handleStartJourney}
+          >
+            {user ? 'Go to My Books' : 'Start Reading Journey'}
           </Button>
-          <Button variant="outline" size="lg" className="border-amber-600 text-amber-700 hover:bg-amber-50 px-8 py-3 text-lg">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-amber-600 text-amber-700 hover:bg-amber-50 px-8 py-3 text-lg"
+            onClick={handleExploreBooks}
+          >
             Explore Books
           </Button>
         </div>

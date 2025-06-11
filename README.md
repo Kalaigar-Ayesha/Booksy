@@ -7,10 +7,7 @@
 
 ## 🌐 Live Demo
 
-👉 [Click here to view the deployed app] https://booksy-k-ayeshas-projects.vercel.app/
-
-> Replace the link above with your actual deployed site URL.
-
+👉 Click here to view the deployed app - https://booksy-k-ayeshas-projects.vercel.app/
 ---
 
 ## ✨ Features
@@ -40,25 +37,6 @@
 
 ---
 
-## 📁 Folder Structure
-
-```
-
-booky/
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── store/
-│   │   ├── hooks/
-│   │   └── utils/
-├── supabase/
-│   └── schema.sql
-└── README.md
-
-```
-
----
 
 ## 📄 License
 

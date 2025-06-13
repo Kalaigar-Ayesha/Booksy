@@ -12,6 +12,7 @@ import Discover from "./pages/Discover";
 import MyBooks from "./pages/MyBooks";
 import Lists from "./pages/Lists";
 import Community from "./pages/Community";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="/my-books" element={<MyBooks />} />
               <Route path="/lists" element={<Lists />} />
               <Route path="/community" element={<Community />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

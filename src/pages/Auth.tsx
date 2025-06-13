@@ -58,8 +58,13 @@ const Auth = () => {
     } else {
       toast({
         title: "Welcome to Booky!",
-        description: "Please check your email to verify your account."
+        description: "Your account has been created successfully. You can now sign in."
       });
+      // Switch to sign in tab after successful signup
+      setTimeout(() => {
+        const signInTab = document.querySelector('[value="signin"]') as HTMLElement;
+        if (signInTab) signInTab.click();
+      }, 1000);
     }
     setIsLoading(false);
   };

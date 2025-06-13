@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { BookCard } from '@/components/BookCard';
+import { WorkingBookCard } from '@/components/WorkingBookCard';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Search, Filter, BookOpen } from 'lucide-react';
+import { Search, BookOpen } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface Book {
@@ -80,7 +79,7 @@ const Discover = () => {
   const getAllGenres = () => {
     const genres = new Set<string>();
     books.forEach(book => {
-      book.genres.forEach(genre => genres.add(genre));
+      book.genres?.forEach(genre => genres.add(genre));
     });
     return Array.from(genres).sort();
   };
@@ -150,16 +149,16 @@ const Discover = () => {
         {/* Books Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredBooks.map((book) => (
-            <BookCard 
+            <WorkingBookCard 
               key={book.id} 
               book={{
-                id: parseInt(book.id),
+                id: book.id,
                 title: book.title,
                 author: book.author,
                 rating: book.average_rating,
-                reviews: 0,
                 cover: book.cover_url,
-                status: 'available'
+                genres: book.genres,
+                description: book.description
               }} 
             />
           ))}

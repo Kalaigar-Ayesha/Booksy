@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signUp = async (email: string, password: string, userData?: any) => {
-    // Remove email verification - users can login immediately after signup
+    // Completely bypass email verification
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -50,6 +50,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         emailRedirectTo: undefined // Remove email verification
       }
     });
+    
+    // If signup is successful but user isn't immediately confirmed, 
+    // try to sign them in directly
+    if (!error) {
+      // Wait a moment for the user to be created
+      setTimeout(async () => {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        if (signInError) {
+          console.log('Auto sign-in after signup failed:', signInError);
+        }
+      }, 500);
+    }
+    
     return { error };
   };
 
